@@ -1,26 +1,66 @@
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
+#include <climits>
 
-static void printChar(char c) {
+static void printChar(int c) {
 	std::cout << "Char: ";
-	if (c < 32 || c > 126)
-	{
-		std::cout << "Character is not printable!" << std::endl;
-		return ;
+	if (c < CHAR_MIN || c > CHAR_MAX)
+		std::cout << "Impossible";
+	else {
+		if (c < 32 || c > 126)
+			std::cout << "Non displayable";
+		else 
+			std::cout << c;
 	}
-	std::cout << c << std::endl;
+	std::cout << std::endl;
 }
 
-static void printInt(int num) {
-	std::cout << "Int: " << num << std::endl;
+static void printInt(long int num) {
+	std::cout << "Int: ";
+	if (num > INT_MAX || num < INT_MIN)
+		std::cout << "Impossible";
+	else
+		std::cout << num;
+	std::cout << std::endl;
 }
 
 static void printFloat(float num) {
-	std::cout << "Float: " << num << 'f' << std::endl;
+	std::cout << "Float: ";
+	if (isnan(num) || isinf(num))
+		std::cout << num;
+	else {
+		if (num == 0.0f)
+			std::cout << "0.0";
+		else {
+			float whole, fractional;
+			fractional = std::modf(num, &whole);
+			if (fractional != 0.0f)
+				std::cout << (whole + fractional);
+			else
+				std::cout << whole << ".0";
+		}
+	}
+	std::cout << 'f' << std::endl;
 }
 
 static void printDouble(double num) {
-	std::cout << "Double: " << num << std::endl;
+	std::cout << "Double: ";
+	if (isnan(num) || isinf(num))
+		std::cout << num;
+	else {
+		if (num == 0.0f)
+			std::cout << "0.0";
+		else {
+			double whole, fractional;
+			fractional = std::modf(num, &whole);
+			if (fractional != 0.0f)
+				std::cout << (whole + fractional);
+			else
+				std::cout << whole << ".0";
+		}
+	}
+	std::cout << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -29,8 +69,8 @@ int main(int argc, char* argv[]) {
 		return (1);
 	}
 	double num = strtod(argv[1], NULL);
-	printChar(static_cast<char>(num));
-	printInt(static_cast<int>(num));
+	printChar(static_cast<int>(num));
+	printInt(static_cast<long int>(num));
 	printFloat(static_cast<float>(num));
 	printDouble(num);
 	return 0;

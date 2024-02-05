@@ -11,7 +11,7 @@ static void printChar(int c) {
 		if (c < 32 || c > 126)
 			std::cout << "Non displayable";
 		else 
-			std::cout << c;
+			std::cout << (char)c;
 	}
 	std::cout << std::endl;
 }

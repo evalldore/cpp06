@@ -68,7 +68,12 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Invalid amount of arguments" << std::endl;
 		return (1);
 	}
-	double num = strtod(argv[1], NULL);
+	double num;
+
+	if (strlen(argv[1]) == 1)
+		num = static_cast<double>(argv[1][0]);
+	else
+		num = strtod(argv[1], NULL);
 	printChar(static_cast<int>(num));
 	printInt(static_cast<long int>(num));
 	printFloat(static_cast<float>(num));

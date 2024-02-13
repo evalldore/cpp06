@@ -65,12 +65,13 @@ static void printDouble(double num) {
 }
 
 int main(int argc, char* argv[]) {
+	double	num;
+	char	*p;
+
 	if (argc < 2 || argc > 2) {
 		std::cerr << "Invalid amount of arguments" << std::endl;
 		return (1);
 	}
-	double	num;
-	char	*p;
 
 	if (strlen(argv[1]) == 1 && !isdigit(argv[1][0]))
 		num = static_cast<double>(argv[1][0]);
@@ -79,6 +80,7 @@ int main(int argc, char* argv[]) {
 		if (*p)
 			num = NAN;
 	}
+
 	printChar(static_cast<int>(num));
 	printInt(static_cast<long int>(num));
 	printFloat(static_cast<float>(num));

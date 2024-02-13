@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <exception>
 #include "Classes.hpp"
 
 Base*	generate(void) {
@@ -32,9 +33,20 @@ void	identify(Base* p) {
 	std::cout << " type" << std::endl;
 }
 
-/*void	identify(Base& p) {
-
-}*/
+void	identify(Base& p) {
+	std::cout << "Is a ";
+	try {
+		if (dynamic_cast<A*>(&p))
+			std::cout << "A";
+		else if (dynamic_cast<B*>(&p))
+			std::cout << "B";
+		else if (dynamic_cast<C*>(&p))
+			std::cout << "C";
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << " type" << std::endl;
+}
 
 int	main(void) {
 	srand(time(NULL));
@@ -42,7 +54,17 @@ int	main(void) {
 	Base*	b = generate();
 	Base*	c = generate();
 
+	std::cout << "Identify pointers" << std::endl;
 	identify(a);
 	identify(b);
 	identify(c);
+
+	std::cout << "Identify references" << std::endl;
+	identify(*a);
+	identify(*b);
+	identify(*c);
+
+	delete a;
+	delete b;
+	delete c;
 }

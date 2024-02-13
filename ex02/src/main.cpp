@@ -58,6 +58,7 @@ int	main(void) {
 	identify(a);
 	identify(b);
 	identify(c);
+	identify(NULL);
 
 	std::cout << "Identify references" << std::endl;
 	identify(*a);

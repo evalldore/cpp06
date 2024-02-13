@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <climits>
+#include <cstring>
 
 static void printChar(int c) {
 	std::cout << "Char: ";
@@ -68,12 +69,16 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Invalid amount of arguments" << std::endl;
 		return (1);
 	}
-	double num;
+	double	num;
+	char	*p;
 
-	if (strlen(argv[1]) == 1)
+	if (strlen(argv[1]) == 1 && !isdigit(argv[1][0]))
 		num = static_cast<double>(argv[1][0]);
-	else
-		num = strtod(argv[1], NULL);
+	else {
+		num = strtod(argv[1], &p);
+		if (*p)
+			num = NAN;
+	}
 	printChar(static_cast<int>(num));
 	printInt(static_cast<long int>(num));
 	printFloat(static_cast<float>(num));

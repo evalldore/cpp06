@@ -7,6 +7,6 @@ int	main(void) {
 
 	uintptr_t	raw = serialize(&whoa);
 	Data*		dataPtr = deserialize(raw);
-
-	std::cout << dataPtr->str << ' ' << dataPtr->settings[0] << ' ' << dataPtr->settings[1] << std::endl;
+	if (dataPtr)
+		std::cout << dataPtr->str << ' ' << dataPtr->settings[0] << ' ' << dataPtr->settings[1] << std::endl;
 }
